@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">TEA Showcase</string>
+
+    <string name="guess_number">Guess number from 0 to 100</string>
+    <string name="check_answer">Check Answer</string>
+    <string name="next_game">Next Game</string>
+    <string name="you_loose">You loose!</string>
+    <string name="you_won">You won!</string>
+    <string name="answer_is_correct">Answer is correct. You won!</string>
+    <string name="answer_is_less">Too low.</string>
+    <string name="answer_is_more">Too much.</string>
+    <string name="ok">OK</string>
+
+    <string name="time_is_up">Time is up. You loose!</string>
+    <string name="next_game_loaded">Game is loaded.\nType any number and press\n\"Check Answer\" button to start.</string>
+    <string name="next_game_loading_failed">Failed to load next game.\nPlease try again.</string>
+    <string name="check_answer_failed">Failed to check answer.\nPlease try again.</string>
+
+    <plurals name="remaining_time">
+        <item quantity="one">%d second left</item>
+        <item quantity="other">%d seconds left</item>
+    </plurals>
+
 </resources>
