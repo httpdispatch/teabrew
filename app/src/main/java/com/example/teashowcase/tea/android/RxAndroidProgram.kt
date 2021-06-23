@@ -5,9 +5,11 @@ import com.example.teashowcase.tea.rx.RxProgram
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 
-class RxAndroidProgram<T : Any>(
+open class RxAndroidProgram<T : Any>(
+    commandHandlers: List<Program.CmdHandler<out Cmd, Observable<out Msg<T>>>>,
     debugEnabled: Boolean = false,
 ) : RxProgram<T, Msg<T>, Cmd>(
+    commandHandlers = commandHandlers,
     outputScheduler = AndroidSchedulers.mainThread(),
     debugEnabled = debugEnabled
 )

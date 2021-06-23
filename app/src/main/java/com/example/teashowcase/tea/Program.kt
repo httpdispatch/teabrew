@@ -4,7 +4,6 @@ interface Program<T : Any, M : Program.Msg<T, C>, C : Program.Cmd, R> {
 
     fun start(
         initialState: T,
-        commandHandlers: List<CmdHandler<out C, R>>,
         component: Component<T>
     )
 

@@ -6,34 +6,22 @@ import androidx.lifecycle.ViewModel
 import com.example.teashowcase.di.AssistedSavedStateViewModelFactory
 import com.example.teashowcase.presentation.model.GameStateModel
 import com.example.teashowcase.presentation.tea.*
-import com.example.teashowcase.tea.android.RxAndroidProgram
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 
 class GameViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    loadNextGameCommandHandler: LoadNextGameCommand.Handler,
-    checkAnswerCommandHandler: CheckAnswerCommand.Handler,
-    controlGameTimeCommandHandler: ControlGameTimeCommand.Handler
+    private val program: GameProgram,
 ) : ViewModel() {
 
     val state: LiveData<GameStateModel> =
         savedStateHandle.getLiveData(GAME_STATE_MODEL, GameStateModel())
 
-    private val program: RxAndroidProgram<GameStateModel> = RxAndroidProgram<GameStateModel>(
-        debugEnabled = true
-    ).apply {
-        start(
+    init {
+        program.start(
             initialState = this@GameViewModel.state.value!!,
-            commandHandlers = listOf(
-                loadNextGameCommandHandler,
-                checkAnswerCommandHandler,
-                controlGameTimeCommandHandler
-            )
-        ) { state ->
-            savedStateHandle.set(GAME_STATE_MODEL, state)
-        }
+        ) { state -> savedStateHandle.set(GAME_STATE_MODEL, state) }
     }
 
     fun onCheckAnswerClicked(answer: String) {

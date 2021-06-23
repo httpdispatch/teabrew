@@ -12,6 +12,7 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 open class RxProgram<T : Any, M : Program.Msg<T, C>, C : Program.Cmd>(
+    private val commandHandlers: List<Program.CmdHandler<out C, Observable<out M>>>,
     private val outputScheduler: Scheduler,
     private val debugEnabled: Boolean = false,
 ) : Program<T, M, C, Observable<out M>> {
@@ -25,7 +26,6 @@ open class RxProgram<T : Any, M : Program.Msg<T, C>, C : Program.Cmd>(
 
     override fun start(
         initialState: T,
-        commandHandlers: List<Program.CmdHandler<out C, Observable<out M>>>,
         component: Program.Component<T>
     ) {
         if (disposable != null) {
